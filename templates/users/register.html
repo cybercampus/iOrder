@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+注册页面
+{% endblock%}
+
+{% block section %}
+<div>
+    <p>注册页面</p>
+    <p style="color: red;">{{ error }}</p>  
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        {% if username %}
+        <div>账号: <input type="text" name="username" value="{{ username }}"></div>
+        {% else %}
+        <div>账号: <input type="text" name="username"></div>
+        {% endif %}
+        
+        <div>密码: <input type="password" name="password"></div>
+        <div><input type="submit" value="提交"></div>
+        
+    </form>
+</div>
+{% endblock%}

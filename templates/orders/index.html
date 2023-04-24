@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    订单页面
+{% endblock%}
+
+{% block nevbar %}
+    {% if username %}
+    <div class="flow-left"><a href="{% url 'orders:index' %}">点餐列表</a></div>
+    <div class="flow-left"><a href="{% url 'orders:createorder' %}">我要点餐</a></div>
+    <div class="flow-right"><a href="{% url 'users:logout' %}">退出</a></div>
+    <div class="flow-right"> 欢迎：{{ username }} 登陆系统！ </div>
+
+    {% else %}
+    <div class="flow-right"><a href="{% url 'users:regist' %}">注册</a></div>
+    <div class="flow-right"><a href="{% url 'users:login' %}">登录</a></div>
+    {% endif %}
+
+{% endblock%}
+
+{% block section %}
+<div >
+    <h3>今日 {% now "Y-m-d" %} 订餐订单：</h3>
+    <table style="display: inline-block; ">
+        <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>下单时间</th>
+        <th>菜品</th>
+        <th>餐馆</th>
+        <th>数量</th>
+        <th>辣味</th>
+        <th>吃饭时间</th>
+        </tr>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.username }}</td>
+                <td>{{ order.createdate }}</td>
+                <td>{{ order.dish }}</td>
+                <td>{{ order.dish.restaurant }}</td>
+                <td>{{ order.quantity }}</td>
+                    <td>{{ order.get_spicy_display }}</td>
+                    <td>{{ order.get_dinnertime_display }}</td> <!--显示中餐/午餐的value-->
+                </tr>
+        {% endfor %}
+                
+    </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if orders.has_previous %}
+                <a href="?page={{ orders.previous_page_number }}" aria-label="previous">
+                    <span aria-hidden="true">上一页</span>
+                </a>
+            {% endif %}
+     
+            <span class="current">
+                第 {{ orders.number }} 页(共 {{ orders.paginator.num_pages }} 页)
+            </span>
+     
+            {% if orders.has_next %}
+                <a href="?page={{ orders.next_page_number }}" aria-label="next">
+                    <span aria-hidden="true">下一页</span>
+                </a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock%}

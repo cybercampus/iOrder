@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initital-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/iorder.css' %}">
+    <title>
+        {% block title %} 点餐系统 {% endblock %}
+    </title>
+</head>
+<body>
+    <div class="main">
+        <div class="nevbar">
+            <div class="flow-left"><img src="{% static 'img/order.jpg' %}" width="32px" title="点餐"></div>
+            {% block nevbar %}
+            <div class="flow-left"></div>
+            <div class="flow-right"></div>
+            <div class="flow-right"><a href="{% url 'users:regist' %}">注册</a></div>
+            <div class="flow-right"><a href="{% url 'users:login' %}">登录</a></div>
+            <div class="flow-right"></div>
+            {% endblock %}
+        </div>
+        {% block section %}
+            
+        {% endblock %}
+        {% block footer %}
+            <div class="footer">
+                @ 版权信息
+            </div>
+        {% endblock %}
+    </div>
+</body>
+</html>

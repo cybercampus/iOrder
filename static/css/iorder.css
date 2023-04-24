@@ -1,0 +1,49 @@
+body {
+    background-color: #ffffff;
+    line-height: 24px;
+    font-size: 16px;
+    font-family: 'PingFang SC','Microsoft YaHei','SimHei','Arial','SimSun';
+}
+div {
+    margin: 5px;
+    text-align: center;
+    border: 1px;
+}
+
+p {
+    font-weight: 300;
+    margin: 10px;
+    padding-left: 10px;
+}
+.footer {
+    margin-top: 50px;
+    height: 25px;
+    color:rgb(70, 70, 70);
+    background-color: #e2e1e1;
+}
+.nevbar {
+    height: 36px;
+    background-color: #e2e1e1;
+}
+.flow-left {
+    float: left; 
+}
+.flow-right {
+    float: right; 
+}
+table {
+    border-collapse: collapse;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+.form-input {
+    display: inline-block; 
+    width: 150px; 
+}
+select { 
+    width: 150px; 
+}
