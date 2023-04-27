@@ -7,7 +7,7 @@
 {% block nevbar %}
     {% if username %}
     <div class="flow-left"><a href="{% url 'orders:index' %}">点餐列表</a></div>
-    <div class="flow-left"><a href="{% url 'orders:createorder' %}">我要点餐</a></div>
+    <div class="flow-left"><a href="{% url 'orders:create' %}">我要点餐</a></div>
     <div class="flow-right"><a href="{% url 'users:logout' %}">退出</a></div>
     <div class="flow-right"> 欢迎：{{ username }} 登陆系统！ </div>
 
@@ -31,17 +31,24 @@
         <th>数量</th>
         <th>辣味</th>
         <th>吃饭时间</th>
+        <th>操作</th>
         </tr>
         {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.username }}</td>
-                <td>{{ order.createdate }}</td>
+                <td>{{ order.createdate|date:'Y-m-d' }}</td>
                 <td>{{ order.dish }}</td>
                 <td>{{ order.dish.restaurant }}</td>
                 <td>{{ order.quantity }}</td>
-                    <td>{{ order.get_spicy_display }}</td>
-                    <td>{{ order.get_dinnertime_display }}</td> <!--显示中餐/午餐的value-->
+                <td>{{ order.get_spicy_display }}</td>
+                <td>{{ order.get_dinnertime_display }}</td> <!--显示中餐/午餐的value-->
+                <td> 
+                    {% if order.username == username %}
+                    <a href="{% url 'orders:edit' order.id %}">编辑</a>&nbsp;&nbsp;
+                    <a href="{% url 'orders:delete' order.id %}">删除</a>
+                    {% endif %}
+                </td>
                 </tr>
         {% endfor %}
                 

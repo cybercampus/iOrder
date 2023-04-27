@@ -5,6 +5,7 @@ app_name = 'orders'
 urlpatterns = [
     # orders 的首页
     path('', views.order, name='index'),
-    path('createorder/', views.CreateOrder, name='createorder'),
-    #path('<int:pk>/', views.DetailView.as_view(), name='order'),
+    path('create/', views.CreateOrder, name='create'),
+    path('edit<int:order_id>/', views.EditOrder, name='edit'),
+    path('delete<int:order_id>/', views.DeleteOrder, name='delete'),
 ]

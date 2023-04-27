@@ -7,7 +7,7 @@
 {% block nevbar %}
     {% if username %}
     <div class="flow-left"><a href="{% url 'orders:index' %}">点餐列表</a></div>
-    <div class="flow-left"><a href="{% url 'orders:createorder' %}">我要点餐</a></div>
+    <div class="flow-left"><a href="{% url 'orders:create' %}">我要点餐</a></div>
     <div class="flow-right"><a href="{% url 'users:logout' %}">退出</a></div>
     <div class="flow-right"> 欢迎：{{ username }} 登陆系统！ </div>
 
@@ -21,7 +21,7 @@
 {% block section %}
 <div >
     <h3>今日是 {% now "Y-m-d" %} ，请订餐！</h3>
-    <form action="CreateOrder" method="post">
+    <form action="" method="post">
         {% csrf_token %}
         <p>人员姓名：{{ obj.username }}<span>{{ errors.username }}</span></p>
         <p>订饭时间：{{ obj.createdate }}<span>{{ errors.createdate }}</span></p>
