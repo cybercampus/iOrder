@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    餐馆页面
+{% endblock%}
+
+{% block nevbar %}
+    {% if username %}
+    <div class="flow-left"><a href="{% url 'orders:index' %}">点餐列表</a></div>
+    <div class="flow-left"><a href="{% url 'orders:create' %}">我要点餐</a></div>
+    <div class="flow-left"><a href="{% url 'supports:index' %}">饭馆列表</a></div>
+    <div class="flow-left"><a href="{% url 'supports:create' %}">创建饭馆</a></div>
+    <div class="flow-right"><a href="{% url 'users:logout' %}">退出</a></div>
+    <div class="flow-right"> 欢迎：{{ username }} 登陆系统！ </div>
+
+    {% else %}
+    <div class="flow-right"><a href="{% url 'users:regist' %}">注册</a></div>
+    <div class="flow-right"><a href="{% url 'users:login' %}">登录</a></div>
+    {% endif %}
+
+{% endblock%}
+
+{% block section %}
+<div >
+    <h3>餐馆列表</h3>
+    <table style="display: inline-block; ">
+        <tr>
+        <th>编号</th>
+        <th>餐馆名称</th>
+        <th>联系电话</th>
+        <th>联系地址</th>
+        <th>营业时间</th>
+        <th>打烊时间</th>
+        <th>餐馆照片</th>
+        <th>操作</th>
+        </tr>
+        {% for rest in restaurants %}
+            <tr>
+                <td>{{ rest.id }}</td>
+                <td>{{ rest.name }}</td>
+                <td>{{ rest.phonenumber }}</td>
+                <td>{{ rest.address }}</td>
+                <td>{{ rest.get_opentime_display }}</td>
+                <td>{{ rest.get_closetime_display }}</td>
+                <td>
+                    {% if rest.pic %}
+                    <img height="34"  src="{{ MEDIA_URL }}{{ rest.pic }}" />
+                    {% endif %}
+                </td>
+                <td> 
+                    {% if order.username == username %}
+                    <a href="{% url 'supports:edit' order.id %}">编辑</a>&nbsp;&nbsp;
+                    <a href="{% url 'supports:delete' order.id %}">删除</a>
+                    {% endif %}
+                </td>
+                </tr>
+        {% endfor %}
+                
+    </table>
+</div>
+{% endblock%}

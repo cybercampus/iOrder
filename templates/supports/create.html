@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    饭馆页面
+{% endblock%}
+
+{% block nevbar %}
+    {% if username %}
+    <div class="flow-left"><a href="{% url 'orders:index' %}">点餐列表</a></div>
+    <div class="flow-left"><a href="{% url 'orders:create' %}">我要点餐</a></div>
+    <div class="flow-left"><a href="{% url 'supports:index' %}">饭馆列表</a></div>
+    <div class="flow-left"><a href="{% url 'supports:create' %}">创建饭馆</a></div>
+    <div class="flow-right"><a href="{% url 'users:logout' %}">退出</a></div>
+    <div class="flow-right"> 欢迎：{{ username }} 登陆系统！ </div>
+
+    {% else %}
+    <div class="flow-right"><a href="{% url 'users:regist' %}">注册</a></div>
+    <div class="flow-right"><a href="{% url 'users:login' %}">登录</a></div>
+    {% endif %}
+
+{% endblock%}
+
+{% block section %}
+<div >
+    <h3>创建新的饭馆信息</h3>
+    <form action="" method="post" enctype="multipart/form-data" >
+        {% csrf_token %} 
+        {{obj.as_p}}
+        <input type="submit" value="提交">
+    </form>
+</div>
+{% endblock%}

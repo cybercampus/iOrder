@@ -40,8 +40,11 @@ class Restaurant(models.Model):
     opentime = models.SmallIntegerField(choices=opentime_choices,default=4)
     # 打烊时间
     closetime = models.SmallIntegerField(choices=closetime_choices,default=5)
+    #图片
+    pic = models.ImageField(upload_to='pic/',null=True,blank=True, verbose_name='Photo of Restaurant')
 
     createdate = models.DateTimeField('date created',auto_now_add=True)
+
 
 #菜品
 class Dish(models.Model):

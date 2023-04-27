@@ -55,6 +55,7 @@ def regist(request):
             User.objects.create(username=username, password=password)
             return HttpResponseRedirect('/users/login')
 
+
 # 退出
 def logout(request):
     request.session.clear()    #清除 session
